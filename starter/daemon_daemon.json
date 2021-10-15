@@ -1,0 +1,7 @@
+{
+  "icc": false,
+  "userns-remap": "default",
+  "live-restore": true,
+  "userland-proxy": false,
+  "no-new-privileges": true
+}
