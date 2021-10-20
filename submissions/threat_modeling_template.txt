@@ -1,0 +1,31 @@
+Docker Threat Modeling
+Given Docker's system components and the STRIDE framework, identify five potential threats 
+that may arise.
+    * Information Disclosure: Due to a misconfiguration of the daemon file the inter-container communication could be set up incorrectly and can lead to unintended disclosure of info
+    * Elevation of Privilege: Container image permissions may be elevated using the --privilege flag. Image libraries may contain security flaws.
+    * Spoofing: An attacker poses as an admin to access aspects of the docker images.
+    * Denial of Service: Attacker floods the application with requests to crash the application.
+    * Tampering: Due to misconfiguration of docker, attacker could hijack the docker client to pull down an image with malware
+ 
+Kubernetes Threat Modeling
+Given Kubernetes' system components and the STRIDE framework, identify five potential threats 
+that may arise.
+    * Tampering: An attacker accesses the kubernetes cluster and installs malware onto one of the pods.
+    * Denial of Service: Attacker floods the pods with requests to overwhelm the cluster with request.
+    * Information Disclosure: if hostPID is set to true, containers running in the host PID namespace can inspect processes running outside of the container
+    * Spoofing: due to a misconfiguration the apiserver does not verify kubelets serving certificate which leads it open to man in the middle attacks.
+    * Information Disclosure: The etcd data directory ownership is not set and an attacker gets access to it which could compromise critical data.
+
+Docker-bench Run Results and Analysis
+From the failed findings, select and document 3 findings from the Docker-bench results that 
+you want to harden based on the 5 attack surface areas you identified in Step 1. At 
+least 1 of the 3 hardened findings should be different from the ones mentioned in the 
+exercise (i.e. 5.10, 5.14, and 5.22).
+    * 2.2 - Ensure network traffic is restricted between containers on the default bridge
+	- All network traffic is allowed by default between containers, this can cause information to leak between the containers. To fix this the daemon.json file should have '"icc": false' added to it.
+    * 2.14 - Ensure containers are restricted from acquiring new privileges (Scored)
+	- By default a container should restrict the ability to acquire new privileges. To fix this the daemon.json file should have '"no-new-privileges": true' added to it.
+    * 2.15 - Ensure live restore is enabled (Scored)
+	- Setting the live-restore to true ensures that the container is not interrupted when it is not available. To fix this the daemon.json file should have '"live-restore": true' added to it.
+    * 2.16 - Ensure Userland Proxy is Disabled (Scored)
+	- userland proxy needs to be set to false in order to allow forwarding using hairpin NAT. To fix this the daemon.json file should have '"userland-proxy": false' added to it.

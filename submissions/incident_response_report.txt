@@ -1,0 +1,6 @@
+1. Incident commander name: Gage Copelin
+2. Executive Summary of what happened: A attacker was able to launch a script onto the cluster using kubectl.
+3. Summary of what was affected: The cpu is being utilized for crypto mining. taking resources from the software.
+4. Summmry of the impact: With the attack that was performed. the attacker was able to launch 3 Crypto-mining containers on the cluster
+5. Summary of the remediation steps: force delete the pods related to the attacked containers.
+6. Summary of lessons learned: One lesson would be to have a much more harden kubernetes. Since to attacker used Kubernetes to access the cluster and install a new image, making the kubeconfig only allow specfic images in order to avoid hostil take over.
