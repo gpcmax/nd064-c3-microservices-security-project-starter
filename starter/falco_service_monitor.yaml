@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    release: prometheus-operator-1634732055
+    release: prometheus-operator-1634744753
   name: falco-exporter-servicemonitor
   namespace: default
 spec:
